@@ -862,6 +862,7 @@ a {
   font-weight: 800;
   font-family: 'Roboto Condensed', sans-serif;
   color: var(--primary-dark);
+  white-space: nowrap;
 }
 
 .stock-status {
@@ -1691,23 +1692,27 @@ a {
     margin-top: 10px;
   }
   .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
     background: #ffffff;
     flex-direction: column;
-    padding: 24px;
-    border-bottom: 2px solid var(--accent-red);
-    box-shadow: var(--shadow-xl);
-    z-index: 100;
+    padding: 80px 24px 24px;
+    box-shadow: -2px 0 15px rgba(0,0,0,0.15);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    border-bottom: none;
   }
   .nav-links.mobile-open {
-    display: flex;
+    right: 0;
   }
   .mobile-toggle {
     display: flex;
+    z-index: 1001;
+    position: relative;
   }
   .hero-text h1 {
     font-size: 36px;
@@ -1742,10 +1747,24 @@ a {
   .logo-slogan {
     font-size: 9px;
   }
+  .header-top {
+    padding: 8px 16px;
+  }
   .header-top-flex {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  /* Hide the long address text and phone number text on mobile so it fits perfectly on one line */
+  .header-top-left span:not(.live-badge) {
+    display: none;
+  }
+  .header-top-right > span {
+    display: none;
+  }
+  .header-top-left, .header-top-right {
+    flex-shrink: 0;
   }
   .hero {
     padding: 50px 0;
@@ -1768,7 +1787,38 @@ a {
     padding: 20px 16px;
   }
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .product-content {
+    padding: 12px;
+  }
+  .product-title {
+    font-size: 13px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .product-price {
+    font-size: 15px;
+  }
+  .btn-quote-card {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+  .image-container {
+    height: 120px;
+  }
+  .product-vehicles {
+    font-size: 10px;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .stock-status {
+    font-size: 9px;
   }
   .active-vehicle-banner {
     flex-direction: column;
