@@ -394,9 +394,9 @@ function App() {
     const intlPhone = cleanPhone.startsWith('0') ? `27${cleanPhone.slice(1)}` : cleanPhone;
     const whatsappLink = `https://wa.me/${intlPhone}`;
 
-    // Web3Forms submission routed to client's inbox
+    // Web3Forms submission routed to client (L.boshomane006@gmail.com)
     const web3FormData = new FormData();
-    web3FormData.append("access_key", "8f1c2f77-a078-4d33-9dfc-7cc13591cb79");
+    web3FormData.append("access_key", "6b8521f6-54b7-43b8-8095-4e15d0bb45ef");
     web3FormData.append("from_name", "BOSH AUTOPARTS INQUIRY");
     web3FormData.append("subject", `Quote Request: ${requiredParts} - ${customerName}`);
     if (email) {
