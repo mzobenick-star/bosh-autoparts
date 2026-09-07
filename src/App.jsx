@@ -403,25 +403,18 @@ function App() {
       web3FormData.append("replyto", email);
     }
     
-    web3FormData.append("[ BOSH AUTOPARTS - NEW INQUIRY ]", "=========================================");
-    web3FormData.append(">> CUSTOMER INFORMATION", "-----------------------------------------");
+    web3FormData.append("Inquiry Type", "Automotive Parts Quote Request");
     web3FormData.append("Customer / Workshop", customerName);
     web3FormData.append("Phone Number", phone);
     if (cleanPhone) {
-      web3FormData.append("WhatsApp Direct Chat", whatsappLink);
+      web3FormData.append("WhatsApp Chat", whatsappLink);
     }
     web3FormData.append("Email Address", email || "Not provided");
-    
-    web3FormData.append(">> VEHICLE & PARTS SPECIFICATIONS", "-----------------------------------------");
     web3FormData.append("Vehicle Details", vehicle);
     web3FormData.append("Required Part(s) / SKU", requiredParts);
     web3FormData.append("Fulfillment Preference", fulfillment);
-    
-    web3FormData.append(">> ADDITIONAL NOTES", "-----------------------------------------");
     web3FormData.append("Customer Message", message || "No extra notes");
-    
-    web3FormData.append("[ END OF INQUIRY ]", "=========================================");
-    web3FormData.append("Recommended Action", "Click the WhatsApp link above or reply to this email directly.");
+    web3FormData.append("Next Step", "Click WhatsApp Chat link above to respond immediately");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
