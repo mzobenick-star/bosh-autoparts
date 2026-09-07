@@ -381,21 +381,47 @@ function App() {
     setIsSubmitting(true);
     setSubmitMessage('');
     
-    const formData = new FormData(event.target);
-    formData.append("access_key", "8f1c2f77-a078-4d33-9dfc-7cc13591cb79");
+    const rawData = new FormData(event.target);
+    const customerName = rawData.get("Full Name") || "Customer";
+    const phone = rawData.get("Phone Number") || "";
+    const email = rawData.get("Email Address") || "";
+    const vehicle = rawData.get("Vehicle Details") || "Not specified";
+    const requiredParts = rawData.get("Required Parts") || "Custom Part";
+    const fulfillment = rawData.get("Fulfillment Option") || "In-Store Counter Pickup";
+    const message = rawData.get("Additional Message") || "";
+
+    const cleanPhone = phone.replace(/[^0-9]/g, '');
+    const intlPhone = cleanPhone.startsWith('0') ? `27${cleanPhone.slice(1)}` : cleanPhone;
+    const whatsappLink = `https://wa.me/${intlPhone}`;
+
+    // Upgraded Web3Forms submission with executive labels, emojis and direct reply
+    const web3FormData = new FormData();
+    web3FormData.append("access_key", "8f1c2f77-a078-4d33-9dfc-7cc13591cb79");
+    web3FormData.append("from_name", "Bosh Autoparts Web Inquiries");
+    web3FormData.append("subject", `🚨 New Quote Request: ${requiredParts} - ${customerName}`);
+    if (email) {
+      web3FormData.append("replyto", email);
+    }
     
-    const customerName = formData.get("Full Name") || "Customer";
-    const requiredParts = formData.get("Required Parts") || "Custom Part";
-    formData.append("subject", `Quote & Availability Request: ${requiredParts}`);
-    formData.append("from_name", `${customerName} (via Bosh Autoparts)`);
+    web3FormData.append("👤 CUSTOMER / WORKSHOP", customerName);
+    web3FormData.append("📱 PHONE NUMBER", phone);
+    if (cleanPhone) {
+      web3FormData.append("💬 WHATSAPP DIRECT CHAT", whatsappLink);
+    }
+    web3FormData.append("✉️ EMAIL ADDRESS", email || "Not provided");
+    web3FormData.append("🚗 VEHICLE DETAILS", vehicle);
+    web3FormData.append("🔧 REQUIRED PART(S) / SKU", requiredParts);
+    web3FormData.append("🚚 FULFILLMENT PREFERENCE", fulfillment);
+    web3FormData.append("📝 CUSTOMER MESSAGE", message || "No extra notes");
+    web3FormData.append("⚡ QUICK ACTION", "Click the WhatsApp link above or reply to this email directly.");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: web3FormData
       });
       const data = await response.json();
-      
+
       if (data.success) {
         setSubmitMessage("Quote request sent successfully! Our sales team will contact you or WhatsApp you shortly.");
         setTimeout(() => {
@@ -403,7 +429,7 @@ function App() {
           setSubmitMessage('');
         }, 3500);
       } else {
-        setSubmitMessage(`Error: ${data.message || "Failed to send. Please WhatsApp us at 074 503 7750"}`);
+        setSubmitMessage(`Error: ${data.message || "Failed to send. Please WhatsApp us directly at 074 503 7750"}`);
       }
     } catch (error) {
       console.error(error);

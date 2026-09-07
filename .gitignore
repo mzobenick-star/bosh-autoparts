@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+pinggy.txt
+tunnel.js
+tunnel_url.txt
