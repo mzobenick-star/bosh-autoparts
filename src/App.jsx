@@ -491,20 +491,75 @@ function App() {
             </button>
           </div>
           
-          {/* Navigation Links */}
+          {/* Mobile Overlay Backdrop */}
+          <div 
+            className={`mobile-backdrop ${mobileNavOpen ? 'active' : ''}`}
+            onClick={() => setMobileNavOpen(false)}
+          ></div>
+
+          {/* Navigation Links / Mobile Drawer */}
           <nav className={`nav-links ${mobileNavOpen ? 'mobile-open' : ''}`}>
-            <a href="#home" onClick={() => setMobileNavOpen(false)}>Home</a>
-            <a href="#catalogue" onClick={() => setMobileNavOpen(false)}>Catalogue</a>
-            <a href="#about" onClick={() => setMobileNavOpen(false)}>About Us</a>
-            <a href="#b2b" onClick={() => setMobileNavOpen(false)}>B2B Solutions</a>
-            <a href="#faq" onClick={() => setMobileNavOpen(false)}>FAQ</a>
-            <a href="#contact" onClick={() => setMobileNavOpen(false)}>Contact</a>
-            <button className="btn btn-primary btn-nav-quote" onClick={() => {
-              setMobileNavOpen(false);
-              handleRequestQuote();
-            }}>
-              Request Quote
-            </button>
+            {/* Mobile Drawer Header */}
+            <div className="mobile-nav-header">
+              <div className="mobile-nav-brand">
+                <img src="/images/bosh_logo.png" alt="Bosh Logo" className="mobile-nav-logo" />
+                <div className="mobile-nav-brand-text">
+                  <span className="mobile-nav-name">BOSH <span>AUTOPARTS</span></span>
+                  <span className="mobile-nav-tag">Soshanguve Hub</span>
+                </div>
+              </div>
+              <button 
+                className="mobile-nav-close-btn" 
+                onClick={() => setMobileNavOpen(false)}
+                aria-label="Close navigation"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Nav Items */}
+            <div className="mobile-nav-links-list">
+              <a href="#home" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">🏠</span> Home
+              </a>
+              <a href="#catalogue" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">⚙️</span> Parts Catalogue
+              </a>
+              <a href="#about" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">🏢</span> About Us
+              </a>
+              <a href="#b2b" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">🤝</span> B2B Solutions
+              </a>
+              <a href="#faq" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">❓</span> FAQ
+              </a>
+              <a href="#contact" onClick={() => setMobileNavOpen(false)}>
+                <span className="nav-link-icon">📍</span> Contact
+              </a>
+            </div>
+
+            {/* Mobile Drawer Footer Actions */}
+            <div className="mobile-nav-actions">
+              <button className="btn btn-primary btn-nav-quote" onClick={() => {
+                setMobileNavOpen(false);
+                handleRequestQuote();
+              }}>
+                ⚡ Request Custom Quote
+              </button>
+              <a 
+                href="https://wa.me/27745037750?text=Hi%20Bosh%20Autoparts%2C%20I%20would%20like%20to%20inquire%20about%20a%20part"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-nav-whatsapp"
+              >
+                💬 Chat on WhatsApp: 074 503 7750
+              </a>
+              <div className="mobile-nav-store-info">
+                <span>📍 3542 Rakololo street, L ext, Soshanguve</span>
+                <span>🕒 Mon - Fri: 08:00 - 17:30 | Sat: 08:00 - 13:00</span>
+              </div>
+            </div>
           </nav>
 
           {/* Mobile Hamburger Button */}
@@ -649,7 +704,10 @@ function App() {
           <div className="catalogue-layout">
             {/* Sidebar Navigation */}
             <aside className="sidebar">
-              <h3>CATEGORIES</h3>
+              <div className="sidebar-title-row">
+                <h3>CATEGORIES</h3>
+                <span className="mobile-swipe-indicator">Swipe &rarr;</span>
+              </div>
               <ul className="category-list">
                 {categories.map(cat => (
                   <li 
@@ -662,7 +720,7 @@ function App() {
                 ))}
               </ul>
 
-              <div className="sidebar-help-card">
+              <div className="sidebar-help-card desktop-only-card">
                 <h4>Need a part not listed?</h4>
                 <p>We source engine, transmission, and body parts daily.</p>
                 <button className="btn btn-secondary btn-sm" onClick={() => handleRequestQuote()}>
@@ -731,6 +789,18 @@ function App() {
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Mobile Sourcing Banner (Placed AFTER products on mobile so it doesn't block catalogue view) */}
+              <div className="catalogue-mobile-help-banner mobile-only-card">
+                <div className="mobile-help-content">
+                  <span className="mobile-help-badge">SPECIAL PART SOURCING</span>
+                  <h4>Can't find your specific vehicle part?</h4>
+                  <p>We source engines, gearboxes, control arms, sensors, and body parts across South Africa daily.</p>
+                  <button className="btn btn-primary btn-sm" onClick={() => handleRequestQuote()}>
+                    ⚡ Request Part Sourcing
+                  </button>
+                </div>
               </div>
             </div>
           </div>
