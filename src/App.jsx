@@ -394,26 +394,26 @@ function App() {
     const intlPhone = cleanPhone.startsWith('0') ? `27${cleanPhone.slice(1)}` : cleanPhone;
     const whatsappLink = `https://wa.me/${intlPhone}`;
 
-    // Upgraded Web3Forms submission with executive labels, emojis and direct reply
+    // Formatted Web3Forms submission with executive labels and direct reply
     const web3FormData = new FormData();
     web3FormData.append("access_key", "8f1c2f77-a078-4d33-9dfc-7cc13591cb79");
     web3FormData.append("from_name", "Bosh Autoparts Web Inquiries");
-    web3FormData.append("subject", `🚨 New Quote Request: ${requiredParts} - ${customerName}`);
+    web3FormData.append("subject", `Quote Request: ${requiredParts} - ${customerName}`);
     if (email) {
       web3FormData.append("replyto", email);
     }
     
-    web3FormData.append("👤 CUSTOMER / WORKSHOP", customerName);
-    web3FormData.append("📱 PHONE NUMBER", phone);
+    web3FormData.append("Customer / Workshop", customerName);
+    web3FormData.append("Phone Number", phone);
     if (cleanPhone) {
-      web3FormData.append("💬 WHATSAPP DIRECT CHAT", whatsappLink);
+      web3FormData.append("WhatsApp Direct Chat", whatsappLink);
     }
-    web3FormData.append("✉️ EMAIL ADDRESS", email || "Not provided");
-    web3FormData.append("🚗 VEHICLE DETAILS", vehicle);
-    web3FormData.append("🔧 REQUIRED PART(S) / SKU", requiredParts);
-    web3FormData.append("🚚 FULFILLMENT PREFERENCE", fulfillment);
-    web3FormData.append("📝 CUSTOMER MESSAGE", message || "No extra notes");
-    web3FormData.append("⚡ QUICK ACTION", "Click the WhatsApp link above or reply to this email directly.");
+    web3FormData.append("Email Address", email || "Not provided");
+    web3FormData.append("Vehicle Details", vehicle);
+    web3FormData.append("Required Part(s) / SKU", requiredParts);
+    web3FormData.append("Fulfillment Preference", fulfillment);
+    web3FormData.append("Customer Message", message || "No extra notes");
+    web3FormData.append("Action", "Click the WhatsApp link above or reply to this email directly.");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -520,22 +520,22 @@ function App() {
             {/* Nav Items */}
             <div className="mobile-nav-links-list">
               <a href="#home" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">🏠</span> Home
+                Home
               </a>
               <a href="#catalogue" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">⚙️</span> Parts Catalogue
+                Parts Catalogue
               </a>
               <a href="#about" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">🏢</span> About Us
+                About Us
               </a>
               <a href="#b2b" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">🤝</span> B2B Solutions
+                B2B Solutions
               </a>
               <a href="#faq" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">❓</span> FAQ
+                FAQ
               </a>
               <a href="#contact" onClick={() => setMobileNavOpen(false)}>
-                <span className="nav-link-icon">📍</span> Contact
+                Contact
               </a>
             </div>
 
@@ -545,7 +545,7 @@ function App() {
                 setMobileNavOpen(false);
                 handleRequestQuote();
               }}>
-                ⚡ Request Custom Quote
+                Request Custom Quote
               </button>
               <a 
                 href="https://wa.me/27745037750?text=Hi%20Bosh%20Autoparts%2C%20I%20would%20like%20to%20inquire%20about%20a%20part"
@@ -553,11 +553,11 @@ function App() {
                 rel="noreferrer"
                 className="btn-nav-whatsapp"
               >
-                💬 Chat on WhatsApp: 074 503 7750
+                Chat on WhatsApp (074 503 7750)
               </a>
               <div className="mobile-nav-store-info">
-                <span>📍 3542 Rakololo street, L ext, Soshanguve</span>
-                <span>🕒 Mon - Fri: 08:00 - 17:30 | Sat: 08:00 - 13:00</span>
+                <span>3542 Rakololo street, L ext, Soshanguve</span>
+                <span>Mon - Fri: 08:00 - 17:30 | Sat: 08:00 - 13:00</span>
               </div>
             </div>
           </nav>
@@ -798,7 +798,7 @@ function App() {
                   <h4>Can't find your specific vehicle part?</h4>
                   <p>We source engines, gearboxes, control arms, sensors, and body parts across South Africa daily.</p>
                   <button className="btn btn-primary btn-sm" onClick={() => handleRequestQuote()}>
-                    ⚡ Request Part Sourcing
+                    Request Part Sourcing
                   </button>
                 </div>
               </div>
