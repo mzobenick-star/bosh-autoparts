@@ -394,26 +394,34 @@ function App() {
     const intlPhone = cleanPhone.startsWith('0') ? `27${cleanPhone.slice(1)}` : cleanPhone;
     const whatsappLink = `https://wa.me/${intlPhone}`;
 
-    // Formatted Web3Forms submission with executive labels and direct reply
+    // Formatted Web3Forms submission with executive labels, text-based autostyle, and direct reply
     const web3FormData = new FormData();
-    web3FormData.append("access_key", "8f1c2f77-a078-4d33-9dfc-7cc13591cb79");
-    web3FormData.append("from_name", "Bosh Autoparts Web Inquiries");
+    web3FormData.append("access_key", "6b8521f6-54b7-43b8-8095-4e15d0bb45ef");
+    web3FormData.append("from_name", "BOSH AUTOPARTS INQUIRY");
     web3FormData.append("subject", `Quote Request: ${requiredParts} - ${customerName}`);
     if (email) {
       web3FormData.append("replyto", email);
     }
     
+    web3FormData.append("[ BOSH AUTOPARTS - NEW INQUIRY ]", "=========================================");
+    web3FormData.append(">> CUSTOMER INFORMATION", "-----------------------------------------");
     web3FormData.append("Customer / Workshop", customerName);
     web3FormData.append("Phone Number", phone);
     if (cleanPhone) {
       web3FormData.append("WhatsApp Direct Chat", whatsappLink);
     }
     web3FormData.append("Email Address", email || "Not provided");
+    
+    web3FormData.append(">> VEHICLE & PARTS SPECIFICATIONS", "-----------------------------------------");
     web3FormData.append("Vehicle Details", vehicle);
     web3FormData.append("Required Part(s) / SKU", requiredParts);
     web3FormData.append("Fulfillment Preference", fulfillment);
+    
+    web3FormData.append(">> ADDITIONAL NOTES", "-----------------------------------------");
     web3FormData.append("Customer Message", message || "No extra notes");
-    web3FormData.append("Action", "Click the WhatsApp link above or reply to this email directly.");
+    
+    web3FormData.append("[ END OF INQUIRY ]", "=========================================");
+    web3FormData.append("Recommended Action", "Click the WhatsApp link above or reply to this email directly.");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
